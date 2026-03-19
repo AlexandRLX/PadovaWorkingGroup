@@ -1,0 +1,205 @@
+\documentclass[oneside]{amsart}
+\input{preamble}
+\input{notation}
+\usepackage[backend=biber,style=alphabetic]{biblatex}
+\addbibresource{pwg.bib}
+\usepackage[left]{showlabels}
+
+\newcommand{\CI}{\mathcal{I}}
+\DeclareMathOperator{\car}{char}
+\newcommand{\Spc}{\cat{Spc}}
+\newcommand{\PreStk}{\cat{PreStk}}
+\newcommand{\CB}{\mathcal{B}}
+\newcommand{\CY}{\mathcal{Y}}
+\newcommand{\CJ}{\mathcal{J}}
+\newcommand{\CK}{\mathcal{K}}
+\newcommand{\PrL}{\cat{Pr}^L}
+\newcommand{\PrR}{\cat{Pr}^R}
+\newcommand{\redu}{^{\mathrm{red}}}
+\DeclareMathOperator{\Fib}{Fib}
+\renewcommand{\CH}{\mathcal{H}}
+\DeclareMathOperator{\Maps}{Maps}
+
+\newcommand{\VD}{\mathbb{D}}
+
+\title{Verdier Duality on the Ran Space}
+\author{Andrea Bignami}
+
+\begin{document}
+\maketitle
+
+We want to relate $C_*(\Bun^{(x)}_G)$ to $\bigotimes_{x\in X}C^{*}_c(BG_x)$. To do so we can use the ran space via
+\begin{align*}
+	s:C^{*}_c(\Ran,\CA)^{\vee} &\to C_*(\Bun^{(x)}(G)) \\
+	C_c^{*}(\Ran, \CB) &= \bigotimes_{x\in X}C^{*}_c(BG_x).
+\end{align*}
+And we will relate the two things on the left using Verdier Duality.
+
+Recall Verdier Duality for sheaves in the classical case: let $X$ be a variety over $k$ and $\Lambda$ be a field. Then we have a functor
+\[
+\VD:D^{b}_c(X,\Lambda)\op \to D_c^{b}(X,\Lambda)
+\] 
+defined by
+\[
+\VD(\CH) = \RD\Hom(\CH,\omega_X)
+\] 
+where
+\[
+\omega_X = \pi_{\text{pt}}^{!}\Lambda.
+\]
+We have
+\begin{align*}
+	\Hom(\CH,\RD\Hom(\CF,\omega_X)) &\isoto \Hom(\CH\otimes^{\LD}\CF,\omega_X) \\
+					&\isoto \Hom(\CH\boxtimes\CF,\Delta_!\omega_X).
+\end{align*}
+For $f:X\to Y$ we have 
+\[
+f_*\VD \isoto \VD f_!.
+\] 
+For $X$ smooth of dimension $n$ 
+\[
+H_c^{k}(X,\Lambda) \isoto H^{2n-k}(X,\Lambda)^{\vee}.
+\]
+
+\section{Verdier Dual}
+Assume that $\CY$ is a prestack with pseudofinitary diagonal.
+
+\begin{definition}
+	For $\CF,\CG\in \Shv^{!}(\CY)$ a \defn{pairing} is a moprhism
+	\[
+		\CF\boxtimes \CG \to \Delta_{\CY,!}\omega_\CY.
+	\] 
+	For such a pairing
+	\begin{align*}
+		F_\CF: \Shv^{!}(\CY)\op &\longrightarrow \Spc \\
+		\CG &\longmapsto \Maps(\CF\boxtimes \CG,\Delta_{\CY,!}\omega_\CY).
+	\end{align*}
+\end{definition}
+This is representable because it maps colimits to limits.
+
+\begin{definition}
+	Let $\VD_\CY(\CF)$ be the object representing $F_\CF$.
+\end{definition}
+\begin{remark}
+	We have a canonical pairing
+	\[
+	\CF \boxtimes \VD_\CY\CF \to \Delta_{\CY,!}\omega_\CY
+	\] 
+\end{remark}
+Given $f:\CY_1\to \CY_2$ pseudo-proper, I can go from a pairing between $\CF$ and $\CG$ to one between $f_!\CF$ and $f_!\CG$
+\[
+f_!\CF \boxtimes f_!\CG \isoto (f\times f)_!\CF\boxtimes\CG \to (f\times f)_!\Delta_{\CY_1,!}\omega_{\CY_1} \isoto \Delta_{\CY_2,!}\circ f_! \omega_{\CY_1} \to \Delta_{\CY_2,!}\omega_{\CY_2}.
+\] 
+
+If $\CG=\VD_\CY(\CF)$ then we have
+\[
+f_!\CF\boxtimes f_!\VD_{\CY_1}(\CF) \to \Delta_{\CY_2,!}\omega_{\CY_2}
+\] 
+which gives a canonically defined map
+\begin{equation}\label{eq:star}
+f_!(\VD_{\CY_1}(\CF)) \to \VD_{\CY_2}(f_!(\CF)).
+\end{equation} 
+
+Taking $\CY_1=\CY,\CY_2=\Spec k$ we get
+\[
+C_c^{*}(\CY,\VD_y(\CF)) \to C_c^{*}(\CY,\CF)^{\vee}.
+\] 
+If further $\CY = \coprod \Spec K$ 
+\[
+H_c^{i}\left( \coprod_{i \in \N}\Spec k,\Lambda \right) = \bigoplus_{i\in \N}H^{i}_c(\Spec k,\Lambda) = \begin{cases}
+	0 & \text{if }i\neq 0 \\
+	\bigoplus_{i\in \N}\Lambda & \text{if }i=0
+\end{cases}
+\] 
+is isomorphic to
+\[
+H^{-i}\left( \coprod \Spec K,\Lambda \right) ^{\vee} = \begin{cases}
+	\prod \Lambda & \text{if }i=0 \\
+	0 & \text{otherwise}.
+\end{cases}
+\] 
+
+\begin{lemma}
+	If $Y_1\to Y_2$ is a proper morphism of schemes, then \eqref{eq:star} is an isomorphism.
+\end{lemma}
+
+\section{Finitary Pseudoschemes}
+Assume that $\CY$ is pseudoproper with finitary diagonal.
+\begin{proposition}
+	If
+	\[
+	\CY = \colim_{a\in A}Z_a
+	\] 
+	then for all $\CF\in \Shv^{!}(\CY)$ 
+	\[
+	\ins_{a,!}\VD_{Z_a}(\CF) \isoto \VD_{\CY}(\ins_{a,!}\CF).
+	\] 
+\end{proposition}
+\begin{corollary}
+	We have
+	\[
+		\VD_{\CY}(\CF) \isoto \lim_{a\in A\op}\ins_{a,!}\circ\VD_{Z_a}(\ins_a^{!}\CF)
+	\] 
+\end{corollary}
+Since
+\[
+\CF \isoto \colim_{a\in A}\ins_{a,!}\ins_a^{!}\CF
+\] 
+we have
+\[
+\VD_{\CY}(\CF) \isoto \lim_{a\in A\op}\VD_\CY(\ins_{a,!}\ins_a^{!}\CF).
+\] 
+
+(Got lost here)
+
+\textbf{Problem:} $\Ran$ is not finitary.
+
+For $n\in \N$ define the $n$-th \defn{truncated Ran space} as follows. For $S\in \Sch$, $\Ran^{n}(S)$ is the set of finite non-empty subsets of $\Maps(S,X)$ of cardinality $\le n$. We have
+\[
+	\Ran^{\le n} \isoto \colim_{I\in (\Fins{^{,\le n}})\op}
+\] 
+so if $X$ is proper, then $\Ran^{\le n}(X)$ is finitary pseudo-proper.
+
+We have inclusions
+\[
+\ins^{\le n}:\Ran^{\le n}\injto \Ran
+\] 
+which are finitary pseudo-proper and
+\[
+\Ran \isoto \colim_{n\in \N}\Ran^{\le n}.
+\] 
+
+\section{Two Stabilization Properties}
+\begin{proposition}
+	Let $X$ be a smooth curve, $\CF\in \Shv^{!}(\Ran)$ be such that there exists $m\ge 0$ such that $\ins_J^{!}\CF|_{\mathring{X}^{J}}$ is concentrated in perverse cohomological degrees $\le -3$ for $|J| > m$. The map
+	\[
+		C^{*}_c(\Ran^{\le n},\ins^{\le n,!}\CF) \to C^{*}_c(\Ran,\CF)
+	\] 
+	the induces an isomorphism in all cohomological degrees $\le 0$ for all $n\ge m$.
+\end{proposition}
+The map in the proposition comes from the fact that
+\[
+\CF \isoto \colim_n \ins^{\le n}_!\ins^{\le n,!}\CF
+\] 
+so
+\[
+C_c^{*}(\Ran,\CF) \isoto \colim_{n}C_c^{*}(\Ran^{\le n},\ins^{\le n,!}\CF).
+\] 
+
+\begin{proposition}
+	Let $X$ be a smooth curve and $\CF\in \Shv^{!}\Ran$ such that there exists $m\ge 0$ such that $\ins_J^{!}\CF|_{\mathring{X}^{J}}$ is concentrated in perverse cohomological degrees $\le |J|-2$ for $|J|>m$. Then
+	\[
+	C^{*}_c(\Ran^{\le n},\VD_{\Ran}(\CF)) \to C^{*}_c(\Ran^{\le n},\VD_{\Ran^{\le n}}\circ(\ins^{\le n,!}\CF))
+	\] 
+	induces an isomorphism in cohomological degreees $\le 0$ for $n\ge m$.
+\end{proposition}
+
+\begin{theorem}
+	Let $X$ be smooth and proper, $\CF\in \Shv^{!}(\Ran)$ be such that for all $k\ge 0$ there exists $m_k\ge 0$ such that $\CF^{!}_J=\ins_J^{!}\CF|_{\mathring{X}^{J}}$ is supported in perverse cohomological degrees $\le -k-|J|$, for $|J|>m_k$. Then Verdier Duality holds for $\CF$, i.e. the map
+	\[
+	C^{*}(\Ran,\VD_{\Ran}\CF) \to C_c^{*}(\Ran,\CF)^{\vee}.
+	\] 
+\end{theorem}
+(Got lost)
+
+\end{document}
