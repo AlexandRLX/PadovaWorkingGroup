@@ -8,6 +8,24 @@
 \definecolor{brightmaroon}{rgb}{0.76, 0.13, 0.28}
 \usepackage[linktocpage=true,colorlinks=true,hyperindex,citecolor=blue,linkcolor=brightmaroon]{hyperref}
 \usepackage[nameinlink]{cleveref}
+
+%fix cleveref bug, following https://tex.stackexchange.com/a/733930
+\usepackage{aliascnt}
+\let\oldtheorem\newtheorem
+% \RenewDocumentCommand{\newtheorem}{m o m O{}}{%
+% \IfNoValueTF{#2}{\oldtheorem{#1}{#3}[#4]}%
+% {\newaliascnt{#1}{#2}%
+% \oldtheorem{#1}[#1]{#3}%
+% \aliascntresetthe{#1}}%
+% }
+\RenewDocumentCommand{\newtheorem}{s m o m O{}}{%
+	\IfBooleanTF{#1}%
+	{\oldtheorem{#2}{#4}}%
+	{\IfNoValueTF{#3}{\oldtheorem{#2}{#4}[#5]}%
+		{\newaliascnt{#2}{#3}%
+			\oldtheorem{#2}[#2]{#4}%
+\aliascntresetthe{#2}}}}
+
 \usepackage[left=1.25in,right=1.25in,top=0.75in,bottom=0.75in]{geometry}
 \setlength{\marginparwidth}{2cm}
 %\usepackage[charter,greekfamily=didot]{mathdesign}
